@@ -6,6 +6,7 @@
     enable = true;
     # package = null;
     enableBashIntegration = true;
+    enableFishIntegration = true;
     # enableZshIntegration = true;
     enableNushellIntegration = true;
     settings = {

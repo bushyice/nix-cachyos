@@ -1,6 +1,19 @@
 { config, pkgs, lib, ... }:
 
 {
+  # programs.fish = {
+  #   enable = true;
+    # package = pkgs.stdenv.mkDerivation {
+    # 	pname = "dummy";
+    #   version = "0";
+    #   src = null;
+    #   dontUnpack = true;
+    #   dontBuild = true;
+    #   installPhase = ''
+    #   mkdir -p $out
+    #   '';
+    # };
+  # };
   programs.zoxide = {
     enable = true;
     enableNushellIntegration = true;
@@ -52,18 +65,26 @@
         prepend /home/makano/.local/bin
       )
 
-      $env.config.hooks.env_change.PWD = ($env.config.hooks.env_change.PWD? | default [])
-      $env.config.hooks.env_change.PWD ++= [{||
-        if (which direnv | is-empty) {
-          return
-        }
-        direnv export json | from json | default {} | load-env
-        # If direnv changes the PATH, convert it to a list
-        if ($env.PATH | describe | str contains "string") {
-          $env.PATH = ($env.PATH | split row (char esep))
-        }
-      }] 
+      # $env.config.hooks.env_change.PWD = ($env.config.hooks.env_change.PWD? | default [])
+      # $env.config.hooks.env_change.PWD ++= [{||
+      #   if (which direnv | is-empty) {
+      #     return
+      #   }
+      #   direnv export json | from json | default {} | load-env
+      #   # If direnv changes the PATH, convert it to a list
+      #   if ($env.PATH | describe | str contains "string") {
+      #     $env.PATH = ($env.PATH | split row (char esep))
+      #   }
+      # }] 
     '';
   };
+
+  programs.direnv = {
+    enable = true;
+    nix-direnv.enable = true;
+    enableBashIntegration = true;
+    enableFishIntegration = true;
+    enableNushellIntegration = true;
+  }; 
 }
 

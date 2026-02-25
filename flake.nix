@@ -1,0 +1,43 @@
+{
+  description = "Home Manager configuration of makano";
+
+  inputs = {
+    # Specify the source of Home Manager and Nixpkgs.
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
+    home-manager = {
+      url = "github:nix-community/home-manager/release-25.11";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    catppuccin.url = "github:catppuccin/nix/release-25.11";
+    stylix.url = "github:danth/stylix/release-25.11";
+  };
+
+  outputs =
+    {
+      nixpkgs,
+      home-manager,
+      stylix,
+      catppuccin,
+      ...
+    }:
+    let
+      system = "x86_64-linux";
+      pkgs = nixpkgs.legacyPackages.${system};
+    in
+    {
+      homeConfigurations."makano" = home-manager.lib.homeManagerConfiguration {
+        inherit pkgs;
+
+        # Specify your home configuration modules here, for example,
+        # the path to your home.nix.
+        modules = [
+          ./home.nix
+          stylix.homeModules.stylix
+          catppuccin.homeModules.catppuccin
+   		];
+
+        # Optionally use extraSpecialArgs
+        # to pass through arguments to home.nix
+      };
+    };
+}

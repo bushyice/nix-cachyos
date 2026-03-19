@@ -89,10 +89,10 @@ layout {
 
 environment {
     ELECTRON_OZONE_PLATFORM_HINT "auto"
-    DISPLAY ":0"
+    //DISPLAY ":0"
 }
 
-spawn-at-startup "xwayland-satellite"
+//spawn-at-startup "xwayland-satellite"
 spawn-at-startup "bash" "-c" "wl-paste --watch cliphist store &"
 //spawn-at-startup "dms" "run"
 spawn-sh-at-startup "/usr/lib/polkit-kde-authentication-agent-1 &" 
@@ -110,12 +110,7 @@ window-rule {
 }
 
 window-rule {
-    match app-id=r#"^zen$"#
-    default-column-width {}
-}
-
-window-rule {
-    match app-id=r#"librewolf"#
+    match app-id=r#"^vivaldi$"#
     default-column-width {}
 }
 
@@ -369,6 +364,7 @@ include "dms/alttab.kdl"
 //include "dms/binds.kdl"
 include "dms/outputs.kdl"
 include "dms/cursor.kdl"
+include "dms/windowrules.kdl"
 
 recent-windows {
     binds {

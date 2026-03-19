@@ -23,7 +23,7 @@
       bind j select-pane -D
       bind k select-pane -U
       bind l select-pane -R
-      bind-key p display-popup -h 80% -w 80%
+      bind-key p display-popup -h 80% -w 80% -E -c "#{pane_current_path}"
       set -g mouse
       set -sg escape-time 0
       set -g status off

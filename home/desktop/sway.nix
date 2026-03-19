@@ -82,9 +82,9 @@
       focus.followMouse = true;
       workspaceAutoBackAndForth = true;
       keybindings = let modifier = config.wayland.windowManager.sway.config.modifier;  in lib.mkOptionDefault {
-        "${modifier}+b" = "exec librewolf";
+        "${modifier}+b" = "exec vivaldi";
         "${modifier}+c" = "exec code";
-        "${modifier}+t" = "exec foot";
+        "${modifier}+t" = "exec ghostty";
         
         "${modifier}+l" = "exec swaylock";
         
@@ -107,7 +107,7 @@
         "${modifier}+q" = "kill";
         "${modifier}+v" = "exec /home/makano/.config/scripts/cliphist.sh c";
         
-        "${modifier}+a" = "exec pkill -x wofi || wofi";
+        "${modifier}+a" = "exec pkill -x wofi || wofi --allow-images --show drun";
 
         "XF86AudioMute" = "exec /home/makano/.config/scripts/volumecontrol.sh -o m";
         "XF86AudioMicMute" = "exec /home/makano/.config/scripts/volumecontrol.sh -i m";

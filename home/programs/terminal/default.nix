@@ -2,8 +2,6 @@
 
 {
   imports = [
-    ./shell
-    ./terminal
-    ./development
+    ./ghostty.nix
   ];
 }

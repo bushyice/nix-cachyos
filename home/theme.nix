@@ -17,6 +17,7 @@ let
   catppuccin.swaync.enable = true;
   catppuccin.nvim.enable = true;
   catppuccin.ghostty.enable = true;
+  # catppuccin.zellij.enable = true;
 
   stylix = {
     enable = true;

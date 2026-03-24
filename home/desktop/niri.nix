@@ -89,10 +89,12 @@ layout {
 
 environment {
     ELECTRON_OZONE_PLATFORM_HINT "auto"
+    EDITOR "helix"
     //DISPLAY ":0"
 }
 
 //spawn-at-startup "xwayland-satellite"
+spawn-at-startup "kdeconnectd"
 spawn-at-startup "bash" "-c" "wl-paste --watch cliphist store &"
 //spawn-at-startup "dms" "run"
 spawn-sh-at-startup "/usr/lib/polkit-kde-authentication-agent-1 &" 

@@ -62,7 +62,8 @@
         split row (char esep) |
         prepend /home/makano/exploit/bin |
         prepend /home/makano/.nix-profile/bin |
-        prepend /home/makano/.local/bin
+        prepend /home/makano/.local/bin |
+        prepend /home/makano/.cargo/bin
       )
 
       # $env.config.hooks.env_change.PWD = ($env.config.hooks.env_change.PWD? | default [])

@@ -17,7 +17,7 @@ let
   catppuccin.swaync.enable = true;
   catppuccin.nvim.enable = true;
   catppuccin.ghostty.enable = true;
-  # catppuccin.zellij.enable = true;
+  catppuccin.zellij.enable = true;
 
   stylix = {
     enable = true;
@@ -30,6 +30,7 @@ let
     targets.neovide.enable = false;
     targets.neovim.enable = false;
     targets.swaync.enable = false;
+    # targets.nushell.enable = false;
     polarity = "dark";
     image = bg_wallpaper;
     base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";

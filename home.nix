@@ -40,6 +40,7 @@
     # (pkgs.writeShellScriptBin "my-hello" ''
     #   echo "Hello, ${config.home.username}!"
     # '')
+    niri
     (writeShellScriptBin "almighty-push" ''
       git add .
       git commit -m "$2"

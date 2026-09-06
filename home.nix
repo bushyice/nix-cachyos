@@ -40,7 +40,7 @@
     # (pkgs.writeShellScriptBin "my-hello" ''
     #   echo "Hello, ${config.home.username}!"
     # '')
-    niri
+    # niri
     (writeShellScriptBin "almighty-push" ''
       git add .
       git commit -m "$2"
@@ -203,6 +203,11 @@
   home.sessionVariables = {
     # EDITOR = "emacs";
   };
+
+  # home.profileDirectory = "${config.home.homeDirectory}/.nix-profile.bak";
+
+  # Prevent Home Manager from trying to manipulate the old symlink location
+  # home.enableNixProfileIntegration = false;
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;

@@ -43,6 +43,9 @@
 	       completer: $carapace_completer # check 'carapace_completer' 
 	     }
        },
+       history: {
+           sync_on_enter: false
+       },
        keybindings: [
          {
            name: backward_kill_word

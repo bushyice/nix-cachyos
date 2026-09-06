@@ -164,6 +164,12 @@ layer-rule {
     place-within-backdrop true
 }
 
+
+layer-rule {
+    match namespace="slowshell"
+    place-within-backdrop true
+}
+
 gestures {
     hot-corners {
         off
@@ -182,6 +188,7 @@ window-rule {
     match app-id="zen"
     match app-id="com.mitchellh.ghostty"
     match app-id="kitty"
+    match app-id="rio"
     draw-border-with-background false
 }
 
@@ -198,13 +205,37 @@ binds {
     Mod+Shift+Slash { show-hotkey-overlay; }
 
     Mod+T hotkey-overlay-title="Open a Terminal: ghostty" { spawn "ghostty"; }
-    Mod+A hotkey-overlay-title="Run an Application: wofi" { spawn "dms" "ipc" "call" "spotlight" "toggle"; }
-    Mod+D hotkey-overlay-title="Run an Application: wmenu" { spawn "${pkgs.wmenu}/bin/wmenu-run" "-i" "-N" "1e1e2e" "-n" "89b4fa" "-M" "1e1e2e" "-m" "89b4fa" "-S" "89b4fa" "-s" "cdd6f4"; }
+    //Mod+A hotkey-overlay-title="Run an Application: wofi" { spawn "dms" "ipc" "call" "spotlight" "toggle"; }
+    Mod+D hotkey-overlay-title="Run an Application: wmenu" { spawn "/nix/store/wqbdrddg72b5k8sb4y5r49y98zlnn75x-wmenu-0.2.0/bin/wmenu-run" "-i" "-N" "1e1e2e" "-n" "89b4fa" "-M" "1e1e2e" "-m" "89b4fa" "-S" "89b4fa" "-s" "cdd6f4"; }
     Mod+B hotkey-overlay-title="Open Browser" { spawn "librewolf"; }
-    Mod+V { spawn "dms" "ipc" "call" "clipboard" "toggle"; }
+    //Mod+V { spawn "dms" "ipc" "call" "clipboard" "toggle"; }
     Mod+Shift+T hotkey-overlay-title="Open Warp" { spawn "warp-terminal"; }
     Mod+Alt+T hotkey-overlay-title="Open ghostty" { spawn "ghostty"; }
     Super+Alt+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn "swaylock"; }
+
+	Mod+A hotkey-overlay-title="Run an Application" {
+	    spawn "sh" "-c" r#"
+	        if pgrep -x dms >/dev/null; then
+	            exec dms ipc call spotlight toggle
+	        elif [ -S /tmp/slowshell.sock ]; then
+	            echo -n "exec spotlight.toggle" | socat - UNIX-CONNECT:/tmp/slowshell.sock
+	        else
+	            exec wofi --allow-images --show drun
+	        fi
+	    "#
+	}
+	
+	Mod+V {
+	    spawn "sh" "-c" r#"
+	        if pgrep -x dms >/dev/null; then
+	            exec dms ipc call clipboard toggle
+	        elif [ -S /tmp/slowshell.sock ]; then
+	            echo -n "exec spotlight.toggle mode=clipboard" | socat - UNIX-CONNECT:/tmp/slowshell.sock
+	        else
+	            exec wofi --show cliphist
+	        fi
+	    "#
+	}
 
     XF86AudioRaiseVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1+"; }
     XF86AudioLowerVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1-"; }

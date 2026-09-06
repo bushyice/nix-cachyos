@@ -65,13 +65,9 @@
                         _children = [
                           {
                             pane = {
-                              size = "70%";
                               command = "yazi";
                               args = [ "." ];
                             };
-                          }
-                          {
-                            pane = {};
                           }
                         ];
                       };

@@ -10,6 +10,7 @@
     };
     catppuccin.url = "github:catppuccin/nix/release-25.11";
     stylix.url = "github:danth/stylix/release-25.11";
+    rio.url = "github:raphamorim/rio/main";
   };
 
   outputs =
@@ -34,7 +35,10 @@
           ./home.nix
           stylix.homeModules.stylix
           catppuccin.homeModules.catppuccin
-   		];
+          ({ pkgs, ... }: {
+            package = rio.packages.${pkgs.system}.rio;
+          })
+   	    ];
 
         # Optionally use extraSpecialArgs
         # to pass through arguments to home.nix
